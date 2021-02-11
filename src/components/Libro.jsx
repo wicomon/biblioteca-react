@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import AuthContext from '../context/autenticacion/authContext';
 import axios from 'axios';
 import Spinner from './Spinner';
 
 const Libro = () => {
+    const authContext = useContext(AuthContext);
+    const {usuarioAutenticado} = authContext;
+
+    useEffect(() => {
+        usuarioAutenticado();
+    }, []);
     
     const {id} = useParams();
 

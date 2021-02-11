@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import logo from '../../ceprevi-logo.png';
 import {Link} from 'react-router-dom';
+import AuthContext from '../../context/autenticacion/authContext';
 
 const Header = () => {
+
+    //extraer la informacion del usuario
+    const authContext = useContext(AuthContext);
+    const {usuarioAutenticado, cerrarSesion} = authContext;
+
+    useEffect(() => {
+        usuarioAutenticado();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-md navbar-light shadow-sm" style={{backgroundColor: "#ff7504e5"}}>
             <div className="container">
@@ -15,16 +26,18 @@ const Header = () => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-
+                        
                     </ul>
 
                     <ul className="navbar-nav ml-auto">
-                            {/* <li className="nav-item">
-                                <a className="nav-link h3" href="login.php">Acceder</a>
-                            </li>
                             <li className="nav-item">
-                                <a className="nav-link h3" href="registro.php">Registro</a>
-                            </li> */}
+                                <button 
+                                    className="btn btn-outline-warning text-uppercase font-weight-bold" 
+                                    onClick={() => cerrarSesion()}
+                                >
+                                    Cerrar Sesión
+                                </button>
+                            </li> 
                     </ul>
                 </div>
             </div>

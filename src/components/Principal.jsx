@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ListaLibros from './ListaLibros';
+import AuthContext from '../context/autenticacion/authContext';
 import axios from 'axios';
 import Spinner from './Spinner';
 
 const Principal = () => {
+
+    //extraer la informacion del usuario
+    const authContext = useContext(AuthContext);
+    const {usuarioAutenticado} = authContext;
+
+    useEffect(() => {
+        usuarioAutenticado();
+    }, []);
+
 
     const [categorias, setCategorias] = useState(false);
 

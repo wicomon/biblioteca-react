@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import AuthContext from '../context/autenticacion/authContext';
 import axios from 'axios';
 import Spinner from './Spinner';
 import Categoria from './Categoria';
 
 const Categorias = () => {
+
+    const authContext = useContext(AuthContext);
+    const {usuarioAutenticado} = authContext;
+
+    useEffect(() => {
+        usuarioAutenticado();
+    }, []);
+
 
     const {id} = useParams();
 

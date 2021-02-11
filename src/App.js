@@ -6,10 +6,16 @@ import Libro from './components/Libro';
 import Header from './components/layout/Header';
 import Navegacion from './components/layout/Navegacion';
 import Categorias from './components/Categorias';
+import Login from './components/Login';
 import Footer from './components/layout/Footer';
+
+import AuthState from './context/autenticacion/authState';
+import RutaPrivada from './components/rutas/RutaPrivada';
 
 import 'owl.carousel/dist/assets/owl.carousel.min.css';
 import 'owl.carousel/dist/assets/owl.theme.default.min.css';
+
+
 
 function App() {
 
@@ -27,20 +33,21 @@ function App() {
   }, []);
 
   return (
-    
+    <AuthState>
     <Router>
       <Header></Header>
       <Navegacion items={item} />
       <div className="contenido">
       <Switch>
-        <Route exact path="/"><Principal /></Route>
-        <Route exact path="/libro"><Principal /></Route>
-        <Route exact path="/categorias/:id"><Categorias /></Route>
-        <Route exact path="/libro/:id"><Libro /></Route>
+        <RutaPrivada exact path="/" component={Principal}/>
+        <RutaPrivada exact path="/categorias/:id" component={Categorias} />
+        <RutaPrivada exact path="/libro/:id" component={Libro} />
+        <Route exact path="/login"><Login /></Route>
       </Switch>
         </div>
       {Object.keys(item).length===0 ? null : <Footer />}
     </Router>
+    </AuthState>
   );
 }
 
